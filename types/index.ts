@@ -5,6 +5,7 @@ export type FormItem = {
     label:TextObject,
     input?:JSX.Element,
     error?:TextObject,
+    setError?:(val:string)=>void,
     isLoading?:boolean
     helperText?:TextObject;
     value:string,

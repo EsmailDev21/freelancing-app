@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Form from '../../../components/core/Form'
 import useTranslator from '../../../hooks/useTranslator'
 import { strings } from '../../../utils/strings'
 import { FormItem } from '../../../types'
 import FormInput from '../../../components/core/FormInput'
-import { getOrientation, useHandleFormChange } from '../../../utils/utilityFunctions'
+import { checkEmail, checkPassword, getOrientation, useHandleFormChange } from '../../../utils/utilityFunctions'
 import { Divider, Icon, Text, View } from 'native-base'
 import { Fontisto } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
@@ -14,20 +14,39 @@ import { EvilIcons } from '@expo/vector-icons';
 const SigninForm = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
+  const [errorEmail,setErrorEmail] = useState(null);
+  const [errorPassword,setErrorPassword] = useState(null);
+  const [loading,setLoading] = useState(false)
+  const handleEmailChange = useCallback(
+    (value:string)=>{
+      setEmail(value)
+      setErrorEmail(checkEmail(value))
+    },[errorEmail]
+  )
+  const handlePasswordChange = useCallback(
+    (value:string)=>{
+      setPassword(value)
+      setErrorPassword(checkPassword(value))
+    },[errorEmail]
+  )
   const submitHandler = () => {
-    console.log({email,password})
+    setLoading(true);
+    setTimeout(()=>{
+      setLoading(false)
+      console.log({email,password})
+      
+    },3000)
   }
+  
   const signInItems : FormItem[] = [
     {
       label:strings.email,
       index:0,
       value:email,
       type:"text",
-      setValue:(val)=>{
-        console.log(val)
-        setEmail(val)
-      },
-      icon:<View marginX={3}><Fontisto name="email" size={12} color="gray" /></View>
+      setValue:handleEmailChange,
+      icon:<View marginX={3}><Fontisto name="email" size={12} color="gray" /></View>,
+      error:errorEmail
       
     },
     {
@@ -35,17 +54,24 @@ const SigninForm = () => {
       index:0,
       value:password,
       type:"password",
-      setValue:val=>setPassword(val),
+      setValue:handlePasswordChange,
       icon:<View marginX={3}><AntDesign name="eyeo" size={12} color="gray" /></View>,
-      helperElement:<Translator link='/' text={strings.forgotPassword}></Translator>
+      helperElement:<Translator link='/' text={strings.forgotPassword}></Translator>,
+      error:errorPassword
     },
   ]
+  useEffect(
+    ()=>{
+      setErrorEmail(checkEmail(email))
+      setErrorPassword(checkPassword(password))
+    },[]
+  )
   return (
     <>
     <View marginY={10} width={"90%"}  alignSelf={getOrientation()==="ARABIC"?"flex-start":"flex-end"}>
       <Translator fontWeight={"black"} fontSize={32} text={strings.welcome}></Translator>
     </View>
-    <Form title={useTranslator(strings.signin)} items={signInItems} submitHandler={submitHandler}  />
+    <Form isLoading={loading} title={useTranslator(strings.signin)} items={signInItems} submitHandler={submitHandler}  />
     <View display={"flex"} flexDirection={getOrientation()==="ARABIC"?"row-reverse":"row"}>
       <Translator color={"muted.700"} text={{
         ar:"ليس لدي حساب",

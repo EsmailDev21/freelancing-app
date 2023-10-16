@@ -1,20 +1,21 @@
 import React from "react";
 import { FormItem, TextObject } from "../../types";
-import { Badge, CheckIcon, FormControl, View } from "native-base";
+import { Badge, CheckIcon, FormControl, Spinner, View, WarningOutlineIcon } from "native-base";
 import Translator from "../hoc/Translator";
 import FormInput from "./FormInput";
 import useTranslator from "../../hooks/useTranslator";
 import MainButton from "./MainButton";
-import { getOrientation } from "../../utils/utilityFunctions";
+import { checkInputArrayHasError, getOrientation } from "../../utils/utilityFunctions";
 import { strings } from "../../utils/strings";
 
 export interface FormProps {
   title: TextObject;
   items: FormItem[];
+  isLoading?:boolean
   submitHandler: () => void;
 }
 const Form: React.FC<FormProps> = (props: FormProps) => {
-  const { title, items, submitHandler } = props;
+  const { title, items, submitHandler,isLoading } = props;
   return (
     <View display={"flex"} width={"full"} alignItems={"center"} justifyContent={"center"}>
       <View marginY={5}>
@@ -29,7 +30,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
       >
         {items &&
           items.map((item: FormItem, index: number) => (
-            <FormControl width={"full"} key={index}>
+            <FormControl isInvalid={item.error!=null} isRequired width={"full"} key={index}>
               <FormControl.Label >
                 <Translator textAlign={"right"} text={item.label} />
               </FormControl.Label>
@@ -39,17 +40,17 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
                   <Translator text={item.helperText} />
                 </View>
               )}
-              {item.error && (
-                <Badge>
-                  <Translator text={item.error} />
-                </Badge>
-              )}
+              {item.error!=null? (
+                <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+              <Translator color={"red.500"} text={item.error} />
+            </FormControl.ErrorMessage>
+              ):null}
             </FormControl>
           ))}
           <View my={5}>
-          <MainButton icon={<CheckIcon />} onPress={submitHandler} orientation={getOrientation()} >
-
-<Translator text={strings.signin} color={"muted.100"} />
+          <MainButton isLoading={isLoading} isDisabled={checkInputArrayHasError(items) || isLoading==true} icon={<CheckIcon />} onPress={submitHandler} orientation={getOrientation()} >
+{isLoading===true?<Spinner color={"muted.50"} />:
+<Translator text={strings.signin} color={"muted.100"} />}
 </MainButton>
           </View>
       </View>
