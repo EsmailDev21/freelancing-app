@@ -69,7 +69,7 @@ const SigninForm = () => {
   return (
     <>
     <View marginY={10} width={"90%"}  alignSelf={getOrientation()==="ARABIC"?"flex-start":"flex-end"}>
-      <Translator fontWeight={"black"} fontSize={32} text={strings.welcome}></Translator>
+      <Translator fontWeight={"black"} fontSize={32} text={strings.welcomeBack}></Translator>
     </View>
     <Form isLoading={loading} title={useTranslator(strings.signin)} items={signInItems} submitHandler={submitHandler}  />
     <View display={"flex"} flexDirection={getOrientation()==="ARABIC"?"row-reverse":"row"}>
