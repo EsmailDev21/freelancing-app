@@ -28,5 +28,10 @@ export const strings = {
         ar:"كلمة السر",
         en:"Password",
         fr:"Mot de passe"
+    },
+    forgotPassword:{
+        ar:"نسيت كلمة السر!",
+        en:"Forgot Password!",
+        fr:"Mot de Passe oublié!"
     }
 }

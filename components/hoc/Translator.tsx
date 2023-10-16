@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "expo-router";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "../../redux/LanguageSlice";
+import { getOrientation } from "../../utils/utilityFunctions";
 
 export interface TranslatorProps {
   text: TextObject;
@@ -16,9 +17,9 @@ const Translator: React.FC<TranslatorProps & ITextProps> = (props: TranslatorPro
   const translatedText = useTranslator(text);
   const lang = useSelector(selectLanguage)
     return (
-       link==undefined ?<Text textAlign={lang==="ar"?"right":"left"} {...rest}>
+       link==undefined ?<Text fontFamily={getOrientation()==="ARABIC"?"Cairo":"Inter"} textAlign={lang==="ar"?"right":"left"} {...rest}>
             {translatedText}
-        </Text>:<Text textAlign={lang==="ar"?"right":"left"} {...rest} fontWeight={"semibold"}><Link href={link}>{translatedText}</Link></Text>
+        </Text>:<Text fontFamily={getOrientation()==="ARABIC"?"Cairo":"Inter"} textAlign={lang==="ar"?"right":"left"} {...rest} fontWeight={"bold"}><Link href={link}>{translatedText}</Link></Text>
     );
 };
 

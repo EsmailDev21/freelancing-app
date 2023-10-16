@@ -9,7 +9,9 @@ export type FormItem = {
     helperText?:TextObject;
     value:string,
     type?:"text" | "password",
-    setValue:(val:string)=>void
+    setValue:(val:string)=>void,
+    icon?:JSX.Element,
+    helperElement?:JSX.Element
 }
 export type StrictTextObject = {
     ar:string,

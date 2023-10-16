@@ -9,21 +9,17 @@ import { NativeBaseProvider } from "native-base";
 import useTranslator from "../hooks/useTranslator";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import { theme } from "../themes/mainTheme";
 
 export default function Index() {
   return (
     <Provider store={store}>
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
           <LangContext>
             {<Translator color={"muted.900"} fontWeight={"semibold"} text={strings.welcome} />}
-            <MainButton
-              onPress={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              orientation={getOrientation()}
-            >
+            
               {<Translator link="/signin" color={"muted.900"} text={strings.signin} />}
-            </MainButton>
+            
             <StatusBar style="auto" />
           </LangContext>
        

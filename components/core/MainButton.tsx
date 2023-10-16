@@ -1,4 +1,4 @@
-import { Button, Text } from "native-base";
+import { Button, IButtonProps, Text } from "native-base";
 import { GestureResponderEvent } from "react-native";
 
 export interface MainButtonProps {
@@ -9,25 +9,29 @@ export interface MainButtonProps {
   children?: JSX.Element;
 }
 
-const MainButton: React.FC<MainButtonProps> = (props: MainButtonProps) => {
+const MainButton: React.FC<MainButtonProps & IButtonProps> = (props: MainButtonProps & IButtonProps) => {
+ 
+ const {orientation,onPress,icon,text,children,...rest} = props
   return (
     <Button
-      bgColor={"muted.900"}
-      _pressed={{bgColor:"muted.800"}}
+    {...rest}
+      bgColor={rest.bgColor??"muted.900"}
+      _pressed={rest._pressed?? {bgColor:"muted.800"}}
       rounded={"md"}
-      onPress={props.onPress}
-      rightIcon={props.orientation === "LATIN" ? undefined : props.icon}
-      leftIcon={props.orientation === "ARABIC" ? undefined : props.icon}
+      px={20}
+      onPress={onPress}
+      rightIcon={orientation === "LATIN" ? undefined : icon}
+      leftIcon={orientation === "ARABIC" ? undefined : icon}
     >
-      {props.text && (
+      {text && (
         <Text
-          textAlign={props.orientation === "LATIN" ? "left" : "right"}
+          textAlign={orientation === "LATIN" ? "left" : "right"}
           fontWeight={"semibold"}
         >
-          {props.text}
+          {text}
         </Text>
       )}
-      {props.children}
+      {children}
     </Button>
   );
 };

@@ -25,14 +25,15 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
         alignItems={"center"}
         justifyContent={"center"}
         flexDirection={"column"}
+        width={"80%"}
       >
         {items &&
           items.map((item: FormItem, index: number) => (
-            <FormControl key={index}>
-              <FormControl.Label>
-                <Translator text={item.label} />
+            <FormControl width={"full"} key={index}>
+              <FormControl.Label >
+                <Translator textAlign={"right"} text={item.label} />
               </FormControl.Label>
-              <FormInput  value={item.value} setValue={item.setValue} rest={{ placeholder: useTranslator(item.label),type:item.type}} />
+              <FormInput helperLink={item.helperElement} icon={item.icon} value={item.value} setValue={item.setValue} rest={{ placeholder: useTranslator(item.label),type:item.type,width:"full"}} />
               {item.helperText && (
                 <View color={"gray.500"}>
                   <Translator text={item.helperText} />
