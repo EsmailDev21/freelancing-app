@@ -15,6 +15,8 @@ export class FormItem {
     itemIsInput?:boolean = true;
     helperElement?:JSX.Element
     itemIsNotInput?:JSX.Element
+    rightElement?:JSX.Element
+    leftElement?:JSX.Element
 }
 export type StrictTextObject = {
     ar:string,

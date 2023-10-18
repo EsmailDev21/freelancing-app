@@ -4,6 +4,11 @@ export const strings = {
     fr: "Bienvenue!",
     en: "Welcome!",
   },
+  next: {
+    ar: "التالي!",
+    fr: "Suivant!",
+    en: "Next!",
+  },
   welcomeBack: {
     ar: "أهلا بك مجددا!",
     fr: "Bon retour chez nous, mon ami!",

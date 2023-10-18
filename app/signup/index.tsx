@@ -8,11 +8,12 @@ import FontProvider from "../../components/hoc/FontProvider";
 import MainProvider from "../../contexts/MainProvider";
 import SigninForm from "../signin/components/SigninForm";
 import SignupForm from "./components/signupForm";
+import ProvidePhoneNumber from "./steps/ProvidePhoneNumber";
 
 const Signup = () => {
   return (
     <MainProvider langBtn={false}>
-        <SignupForm />
+        <ProvidePhoneNumber />
     </MainProvider>
     
   );

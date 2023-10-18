@@ -7,10 +7,11 @@ import FormInput from '../../../components/core/FormInput'
 import { checkEmail, checkMatch, checkPassword, checkString, getOrientation, useHandleFormChange } from '../../../utils/utilityFunctions'
 import { Divider, Icon, Text, View } from 'native-base'
 import { Fontisto } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+
 import Translator from '../../../components/hoc/Translator'
 import MainButton from '../../../components/core/MainButton'
 import { EvilIcons } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
 import HelperText from '../../signin/components/HelperText'
 import TextInsideDivider from '../../signin/components/TextInsideDivider'
 import Welcome from '../../signin/components/Welcome'

@@ -42,6 +42,16 @@ export const checkEmail=(email:string)=> {
     
     return null;
   }
+  export const checkPhoneNumber=(value:string,cantBeEmpty:TextObject,mustBeNumberic:TextObject)=> {
+    if(value.length===0){
+      return cantBeEmpty
+    }
+    
+    if(value.search(/[a-z]/)>1 || value.search(/[A-Z]/)>1)
+      return mustBeNumberic
+    
+    return null;
+  }
   export const checkMatch=(value:string,value1:string,message)=> {
     if(value!==value1){
       return message

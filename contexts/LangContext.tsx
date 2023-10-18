@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLanguage, setLanguage } from "../redux/LanguageSlice";
 import { getOrientation } from "../utils/utilityFunctions";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LanguageContext = createContext(null);
 
@@ -26,6 +27,8 @@ const LanguageProvider = ({ children,withButton=true }: {children:any,withButton
 
   return (
     <LanguageContext.Provider value={useLanguage()}>
+      <SafeAreaView>
+        
 {withButton &&      <View position={"relative"} width={"100"} zIndex={999} top={1} left={1}>
         <Menu
           w="190"
@@ -82,6 +85,7 @@ const LanguageProvider = ({ children,withButton=true }: {children:any,withButton
       >
         {children}
       </View>
+      </SafeAreaView>
     </LanguageContext.Provider>
   );
 };

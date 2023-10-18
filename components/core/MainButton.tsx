@@ -1,5 +1,6 @@
 import { Button, IButtonProps, Text } from "native-base";
 import { GestureResponderEvent } from "react-native";
+import PopupComponent from "../animations/PopupComponent";
 
 export interface MainButtonProps {
   onPress: (event:GestureResponderEvent)=>void;
@@ -13,7 +14,7 @@ const MainButton: React.FC<MainButtonProps & IButtonProps> = (props: MainButtonP
  
  const {orientation,onPress,icon,text,children,...rest} = props
   return (
-    <Button
+     <Button
     {...rest}
       bgColor={rest.bgColor??"muted.900"}
       _pressed={rest._pressed?? {bgColor:"muted.800"}}

@@ -14,6 +14,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import Welcome from './Welcome'
 import TextInsideDivider from './TextInsideDivider'
 import HelperText from './HelperText'
+import PopupComponent from '../../../components/animations/PopupComponent'
 const SigninForm = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -71,8 +72,10 @@ const SigninForm = () => {
   )
   return (
     <>
-    <Welcome />
-    <Form isLoading={loading} title={strings.signin} items={signInItems} submitHandler={submitHandler}  />
+    <PopupComponent>
+      <View width={"md"}><Welcome /></View>
+    </PopupComponent>
+    <Form isLoading={loading} title={strings.signin} items={signInItems} submitText={strings.loginScreen} submitHandler={submitHandler}  />
     <HelperText link='/signup' text1={{
         ar:"ليس لدي حساب",
         en:"Don't have and account?",
