@@ -73,7 +73,7 @@ const SigninForm = () => {
   return (
     <>
     <PopupComponent>
-      <View width={"md"}><Welcome /></View>
+      <View width={"sm"}><Welcome /></View>
     </PopupComponent>
     <Form isLoading={loading} title={strings.signin} items={signInItems} submitText={strings.loginScreen} submitHandler={submitHandler}  />
     <HelperText link='/signup' text1={{

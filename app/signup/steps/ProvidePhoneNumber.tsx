@@ -25,8 +25,11 @@ import { EvilIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FormItem } from "../../../types";
 import PopupComponent from "../../../components/animations/PopupComponent";
+import { useNavigation, useRouter } from "expo-router";
 const ProvidePhoneNumber = () => {
   const isLoading = useSelector(selectIsLoading);
+  const navigate = useNavigation();
+  const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState("");
   const error = useSelector(selectError);
   const dispatch = useDispatch();
@@ -79,6 +82,7 @@ const ProvidePhoneNumber = () => {
       dispatch(setIsLoading(false));
       console.log({ phoneNumber, isLoading, error });
     }, 3000);
+    router.push("/signup/steps/PhoneVerificationScreen")
   };
   useEffect(() => {
     if (phoneNumber.length != 0)
