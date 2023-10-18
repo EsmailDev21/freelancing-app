@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormItem } from "../types";
+import { FormItem, TextObject } from "../types";
 
 export const getOrientation = () => {
     const lang = window.localStorage.getItem("language");
@@ -33,6 +33,20 @@ export const checkEmail=(email:string)=> {
         fr:"E-mail non valide!"
       }
     }
+    return null;
+  }
+  export const checkString=(value:string,message:TextObject)=> {
+    if(value.length===0){
+      return message
+    }
+    
+    return null;
+  }
+  export const checkMatch=(value:string,value1:string,message)=> {
+    if(value!==value1){
+      return message
+    }
+    
     return null;
   }
   

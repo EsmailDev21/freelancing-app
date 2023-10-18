@@ -11,6 +11,9 @@ import { AntDesign } from '@expo/vector-icons';
 import Translator from '../../../components/hoc/Translator'
 import MainButton from '../../../components/core/MainButton'
 import { EvilIcons } from '@expo/vector-icons'; 
+import Welcome from './Welcome'
+import TextInsideDivider from './TextInsideDivider'
+import HelperText from './HelperText'
 const SigninForm = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -62,34 +65,24 @@ const SigninForm = () => {
   ]
   useEffect(
     ()=>{
-      setErrorEmail(checkEmail(email))
-      setErrorPassword(checkPassword(password))
+     if(email.length!=0) setErrorEmail(checkEmail(email))
+     if(password.length!=0) setErrorPassword(checkPassword(password))
     },[]
   )
   return (
     <>
-    <View marginY={10} width={"90%"}  alignSelf={getOrientation()==="ARABIC"?"flex-start":"flex-end"}>
-      <Translator fontWeight={"black"} fontSize={32} text={strings.welcomeBack}></Translator>
-    </View>
-    <Form isLoading={loading} title={useTranslator(strings.signin)} items={signInItems} submitHandler={submitHandler}  />
-    <View display={"flex"} flexDirection={getOrientation()==="ARABIC"?"row-reverse":"row"}>
-      <Translator color={"muted.700"} text={{
+    <Welcome />
+    <Form isLoading={loading} title={strings.signin} items={signInItems} submitHandler={submitHandler}  />
+    <HelperText link='/signup' text1={{
         ar:"ليس لدي حساب",
         en:"Don't have and account?",
         fr:"Je n'avais pas un compte!"
-      }}></Translator>
-      <Text color={"muted.900"}>, </Text>
-      <Translator fontWeight={"black"} link='/' text={strings.signupForOurServices}></Translator>
-    </View>
-    <View marginY={5} width={"80%"} display={"flex"} flexDir={"row"} alignItems={"center"} justifyContent={"center"}>
-      <Divider h={"2px"} width={"30%"} color={"muted.700"} />
-      <Translator marginX={2} color={"muted.700"} text={{
+      }} text2={strings.signupForOurServices} />
+    <TextInsideDivider text={{
         ar:"أو التسجيل عبر",
         en:"Or Signup with",
         fr:"Ou connèctez-vous avec"
-      }}></Translator>
-      <Divider h={"2px"} width={"30%"} color={"muted.700"} />
-    </View>
+      }} />
     <View  marginY={5} width={"80%"} display={"flex"} flexDir={"row"} alignItems={"center"} justifyContent={"center"}>
       <MainButton icon={<EvilIcons name="sc-facebook" size={24} color="white" />} w={"40%"} marginX={2} _pressed={{bgColor:'indigo.900'}} bgColor={"indigo.800"} onPress={()=>console.log("pressed")} orientation={getOrientation()} >
         <Translator color={"white"} fontWeight={"bold"} text={{

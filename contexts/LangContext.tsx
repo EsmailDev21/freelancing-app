@@ -17,7 +17,7 @@ export const useLanguage = () => {
   return { language, setLang };
 };
 
-const LanguageProvider = ({ children }: any) => {
+const LanguageProvider = ({ children,withButton=true }: {children:any,withButton?:boolean}) => {
   const lang = useSelector(selectLanguage);
   const dispatch = useDispatch();
   const switchLanguage = (language: "ar" | "fr" | "en") => {
@@ -26,7 +26,7 @@ const LanguageProvider = ({ children }: any) => {
 
   return (
     <LanguageContext.Provider value={useLanguage()}>
-      <View position={"relative"} width={"100"} zIndex={999} top={1} left={1}>
+{withButton &&      <View position={"relative"} width={"100"} zIndex={999} top={1} left={1}>
         <Menu
           w="190"
           trigger={(triggerProps) => {
@@ -72,7 +72,7 @@ const LanguageProvider = ({ children }: any) => {
             <Text fontFamily={"Inter"}>Français</Text>
           </Menu.Item>
         </Menu>
-      </View>
+      </View>}
       <View
         textAlign={lang === "ar" ? "right" : "left"}
         display={"flex"}

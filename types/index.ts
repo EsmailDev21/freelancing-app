@@ -1,18 +1,20 @@
 import { IInputComponentType } from "native-base/lib/typescript/components/primitives/Input/types";
 
-export type FormItem = {
+export class FormItem {
     index?:number
-    label:TextObject,
-    input?:JSX.Element,
-    error?:TextObject,
-    setError?:(val:string)=>void,
+    label:TextObject
+    input?:JSX.Element
+    error?:TextObject
+    setError?:(val:string)=>void
     isLoading?:boolean
-    helperText?:TextObject;
-    value:string,
-    type?:"text" | "password",
-    setValue:(val:string)=>void,
-    icon?:JSX.Element,
+    helperText?:TextObject
+    value:string
+    type?:"text" | "password"
+    setValue:(val:string)=>void
+    icon?:JSX.Element
+    itemIsInput?:boolean = true;
     helperElement?:JSX.Element
+    itemIsNotInput?:JSX.Element
 }
 export type StrictTextObject = {
     ar:string,

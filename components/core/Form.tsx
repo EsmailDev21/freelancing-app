@@ -18,8 +18,8 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
   const { title, items, submitHandler,isLoading } = props;
   return (
     <View display={"flex"} width={"full"} alignItems={"center"} justifyContent={"center"}>
-      <View marginY={5}>
-        <Translator color={"muted.900"} text={title} />
+      <View marginTop={1} marginBottom={2}>
+        <Translator fontSize={24} fontWeight={"black"} color={"muted.900"} text={title} />
       </View>
       <View
         display={"flex"}
@@ -50,7 +50,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
           <View my={5}>
           <MainButton isLoading={isLoading} isDisabled={checkInputArrayHasError(items) || isLoading==true} icon={<CheckIcon />} onPress={submitHandler} orientation={getOrientation()} >
 {isLoading===true?<Spinner color={"muted.50"} />:
-<Translator text={strings.signin} color={"muted.100"} />}
+<Translator text={title} color={"muted.100"} />}
 </MainButton>
           </View>
       </View>
