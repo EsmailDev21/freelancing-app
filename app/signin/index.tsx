@@ -8,18 +8,9 @@ import { theme } from "../../themes/mainTheme";
 import FontProvider from "../../components/hoc/FontProvider";
 
 const Signin = () => {
-  return (
-    <Provider store={store}>
-      <NativeBaseProvider theme={theme}>
-        <FontProvider>
-      <LangContext>
-      
+  return (   
       <SigninForm />
-    </LangContext>
-    </FontProvider>
-      </NativeBaseProvider>
-    </Provider>
-    
+ 
   );
 };
 

@@ -36,6 +36,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
       width={"full"}
       alignItems={"center"}
       justifyContent={"center"}
+      padding={10}
     >
       <View marginTop={1} marginBottom={2}>
         <Translator

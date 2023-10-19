@@ -10,21 +10,17 @@ import useTranslator from "../hooks/useTranslator";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import { theme } from "../themes/mainTheme";
+import MainProvider from "../contexts/MainProvider";
 
 export default function Index() {
-  return (
-    <Provider store={store}>
-      <NativeBaseProvider theme={theme}>
-          <LangContext>
+  return (<>
             {<Translator color={"muted.900"} fontWeight={"semibold"} text={strings.welcome} />}
             
               {<Translator link="/signin" color={"muted.900"} text={strings.signin} />}
             
             <StatusBar style="auto" />
-          </LangContext>
-       
-      </NativeBaseProvider>
-    </Provider>
+           </>
+
   );
 }
 

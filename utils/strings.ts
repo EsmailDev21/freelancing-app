@@ -84,6 +84,11 @@ export const strings = {
     fr: "Profil d'utilisateur",
   },
 
+  errorVerificationPhone:{
+    ar: "خطأ, رمز التحقق غير متطابق",
+    en: "Error, verification code doesn't match!",
+    fr: "Erreur, le code de verification est faux!"
+  },
   // Messaging
   messages: {
     ar: "الرسائل",

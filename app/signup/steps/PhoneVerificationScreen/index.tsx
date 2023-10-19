@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MainProvider from "../../../../contexts/MainProvider";
 import PopupComponent from "../../../../components/animations/PopupComponent";
 import HeaderText from "./components/HeaderText";
@@ -12,20 +12,74 @@ import {
   getOrientation,
   checkInputArrayHasError,
 } from "../../../../utils/utilityFunctions";
-import { useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  selectCode,
+  selectError,
+  selectIsVerified,
+  selectProvidedCode,
+  sendCode,
+  setError
+} from "../../../../redux/slices/phoneVerificationSlice";
+import useErrorToast from "../../../../components/core/toasts/ErrorToast";
+import store from "../../../../redux/store";
+import useAppDispatch from "../../../../hooks/useAppDispatch";
+import useAppSelector from "../../../../hooks/useAppSelector";
+import useSuccessToast from "../../../../components/core/toasts/useSuccessToast";
 
 const PhoneVerificationScreen = () => {
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const submitHandler = useCallback(() => {
+  const errorToast = useErrorToast();
+  const successToast = useSuccessToast();
+  const isVerified = useSelector(selectIsVerified);
+  const code = useAppSelector(selectProvidedCode)
+  const key = useAppSelector(selectCode);
+  const dispatch = useAppDispatch();
+  const errorPhoneVerification = useAppSelector(selectError);
+  const submitHandler = () => {
     setLoading(true);
-    setTimeout(() => console.log("Submitted"), 3000);
-    router.replace("/")
-  }, [loading]);
+    //setTimeout(() => console.log("Submitted"), 3000);
+    if (code==key) {
+      successToast({
+        title:strings.genericSuccess,
+        message:{
+          ar:"تم التأكيد بنجاح :D",
+          en:"Verified successfully! :D",
+          fr:"Verifié avec succée :D!"
+        }
+      })
+      setTimeout(
+        ()=>{
+          
+      router.push("/signup/steps/CompleteProfileFirstScreen");
+        },3000
+      )
+    } else {
+      dispatch(
+        setError({
+          ar: "خطأ, رمز التحقق غير متطابق",
+          en: "Error, verification code doesn't match!",
+          fr: "Erreur, le code de verification est faux!"
+        })
+      );
+      console.log({code,key})
+      setLoading(false);
+      errorToast({
+        title: strings.genericError,
+        message: strings.errorVerificationPhone,
+      });
+    }
+  }
+ useEffect(
+  ()=>{
+    dispatch(sendCode(localStorage.getItem("code")))
+  }
+ )
   return (
-    <MainProvider langBtn={true}>
+    <>
       <PopupComponent>
         <HeaderText text={strings.verifyPhoneNumber} />
       </PopupComponent>
@@ -57,7 +111,7 @@ const PhoneVerificationScreen = () => {
           )}
         </MainButton>
       </PopupComponent>
-    </MainProvider>
+    </>
   );
 };
 

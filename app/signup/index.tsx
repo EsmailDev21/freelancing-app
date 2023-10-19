@@ -7,14 +7,12 @@ import { theme } from "../../themes/mainTheme";
 import FontProvider from "../../components/hoc/FontProvider";
 import MainProvider from "../../contexts/MainProvider";
 import SigninForm from "../signin/components/SigninForm";
-import SignupForm from "./components/signupForm";
+import SignupForm from "./components/CompleteProfileForm";
 import ProvidePhoneNumber from "./steps/ProvidePhoneNumber";
 
 const Signup = () => {
   return (
-    <MainProvider langBtn={false}>
         <ProvidePhoneNumber />
-    </MainProvider>
     
   );
 };

@@ -1,6 +1,8 @@
 import { HStack, View } from "native-base";
 import React, { useState,useRef, useCallback, useEffect } from "react";
 import SingleCharacterInput from "../../../../../components/core/SingleCharacterInput";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProvidedCode, setProvidedCode } from "../../../../../redux/slices/phoneVerificationSlice";
 
 const PhoneVerificationInput = (props) => {
   const [value1, setValue1] = useState("");
@@ -9,6 +11,8 @@ const PhoneVerificationInput = (props) => {
   const [value4, setValue4] = useState("");
   const [value5, setValue5] = useState("");
   const [value6, setValue6] = useState("");
+  const dispatch = useDispatch();
+  const providedCode = useSelector(selectProvidedCode)
     const ref1= useRef(null)
     const ref2= useRef(null)
     const ref3= useRef(null)
@@ -46,12 +50,13 @@ const PhoneVerificationInput = (props) => {
             ref6.current.focus()
         },[]
     )
-    const handleChangeValue6 = useCallback(
+    const handleChangeValue6 = 
         (value:string)=>{
             setValue6(value)
-            
-        },[]
-    )
+              dispatch(setProvidedCode(value1+value2+value3+value4+value5+value))
+              console.log({providedCode})
+             
+        }
   const items = [
     {
       value: value1,
@@ -93,7 +98,6 @@ const PhoneVerificationInput = (props) => {
     <HStack justifyContent={"center"} height={"md"} alignItems={"flex-start"} space={2}>
       {items.map((item, _index) => (
         <SingleCharacterInput
-        ref={item.ref}
         key={_index}
         rest={{w:"12%",h:"15%",fontSize:24,fontWeight:"bold",textAlign:"center",ref:item.ref}}
           value={item.value}

@@ -29,7 +29,7 @@ const LanguageProvider = ({ children,withButton=true }: {children:any,withButton
     <LanguageContext.Provider value={useLanguage()}>
       <SafeAreaView>
         
-{withButton &&      <View position={"relative"} width={"100"} zIndex={999} top={1} left={1}>
+{withButton &&      <View position={"relative"} width={"20%"} zIndex={999} top={1} left={20}>
         <Menu
           w="190"
           trigger={(triggerProps) => {

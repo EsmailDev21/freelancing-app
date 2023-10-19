@@ -17,7 +17,8 @@ import TextInsideDivider from '../../signin/components/TextInsideDivider'
 import Welcome from '../../signin/components/Welcome'
 import InputIcon from '../../../components/core/InputIcon'
 import CheckBoxText from '../../../components/core/CheckBoxText'
-const SignupForm = () => {
+import MainProvider from '../../../contexts/MainProvider'
+const CompleteProfileForm = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [name,setName] = useState("")
@@ -80,7 +81,7 @@ const SignupForm = () => {
     },3000)
   }
   
-  const signUpItems : FormItem[] = [
+  const items : FormItem[] = [
     {
         label:strings.name,
         index:0,
@@ -154,46 +155,32 @@ const SignupForm = () => {
     },[]
   )
   return (
-    <>
-    <Welcome text={strings.welcome} />
-    <Form isLoading={loading} title={strings.signupForOurServices} items={signUpItems} submitHandler={submitHandler}  />
-    <HelperText link='/signin' text1={{
-        ar:" لدي حساب مسبقا",
-        en:"I already have an account!",
-        fr:"Javais déja un compte!"
-      }} text2={strings.signin} />
-    <TextInsideDivider text={{
-        ar:"أو التسجيل عبر",
-        en:"Or Signup with",
-        fr:"Ou connèctez-vous avec"
-      }} />
-    <View  marginY={5} width={"80%"} display={"flex"} flexDir={"row"} alignItems={"center"} justifyContent={"center"}>
-      <MainButton icon={<EvilIcons name="sc-facebook" size={24} color="white" />} w={"40%"} marginX={2} _pressed={{bgColor:'indigo.900'}} bgColor={"indigo.800"} onPress={()=>console.log("pressed")} orientation={getOrientation()} >
-        <Translator color={"white"} fontWeight={"bold"} text={{
-          ar:"فيسبوك",
-          en:"facebook",
-          fr:"facebook"
-        }}></Translator>
-      </MainButton>
-      <MainButton icon={<AntDesign name="google" size={12} color="muted.900" />} marginX={2} w={"40%"}  _pressed={{bgColor:'muted.50'}} bgColor={"muted.100"} onPress={()=>console.log("pressed")} orientation={getOrientation()} >
-        <Translator fontWeight={"bold"} text={{
-          ar:"جوجل",
-          en:"Google",
-          fr:"Google"
-        }}></Translator>
-      </MainButton>
-    </View>
-    <CheckBoxText value='0' text={{
-        ar:"من خلال تحديد المربع فإنك توافق على",
-        en:"By checking the box you agree to our",
-        fr:"En cochant la case, vous acceptez nos"
-    }} textLink={{
-        ar:"شروط الاستخدام الخاصة بنا ",
-        en:" terms of use",
-        fr:" conditions d'utilisation"
-    }} link='/' />
-    </>
+   
+    <><Form isLoading={loading} title={strings.signupForOurServices} items={items} submitText={strings.editProfile} submitHandler={submitHandler} /><View marginY={5} width={"80%"} display={"flex"} flexDir={"row"} alignItems={"center"} justifyContent={"center"}>
+        <MainButton icon={<EvilIcons name="sc-facebook" size={24} color="white" />} w={"40%"} marginX={2} _pressed={{ bgColor: 'indigo.900' }} bgColor={"indigo.800"} onPress={() => console.log("pressed")} orientation={getOrientation()}>
+          <Translator color={"white"} fontWeight={"bold"} text={{
+            ar: "فيسبوك",
+            en: "facebook",
+            fr: "facebook"
+          }}></Translator>
+        </MainButton>
+        <MainButton icon={<AntDesign name="google" size={12} color="muted.900" />} marginX={2} w={"40%"} _pressed={{ bgColor: 'muted.50' }} bgColor={"muted.100"} onPress={() => console.log("pressed")} orientation={getOrientation()}>
+          <Translator fontWeight={"bold"} text={{
+            ar: "جوجل",
+            en: "Google",
+            fr: "Google"
+          }}></Translator>
+        </MainButton>
+      </View><CheckBoxText value='0' text={{
+        ar: "من خلال تحديد المربع فإنك توافق على",
+        en: "By checking the box you agree to our",
+        fr: "En cochant la case, vous acceptez nos"
+      }} textLink={{
+        ar: "شروط الاستخدام الخاصة بنا ",
+        en: " terms of use",
+        fr: " conditions d'utilisation"
+      }} link='/' /></>
   )
 }
 
-export default SignupForm
+export default CompleteProfileForm

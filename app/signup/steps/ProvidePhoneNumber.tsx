@@ -6,13 +6,12 @@ import Translator from "../../../components/hoc/Translator";
 import { strings } from "../../../utils/strings";
 import {
   checkPhoneNumber,
-  checkString,
   getOrientation,
 } from "../../../utils/utilityFunctions";
 import HelperText from "../../signin/components/HelperText";
 import TextInsideDivider from "../../signin/components/TextInsideDivider";
 import Welcome from "../../signin/components/Welcome";
-import { useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import {
   selectError,
   selectIsLoading,
@@ -26,13 +25,18 @@ import { AntDesign } from "@expo/vector-icons";
 import { FormItem } from "../../../types";
 import PopupComponent from "../../../components/animations/PopupComponent";
 import { useNavigation, useRouter } from "expo-router";
+import { sendCode } from "../../../redux/slices/phoneVerificationSlice";
+import MainProvider from "../../../contexts/MainProvider";
+import store from "../../../redux/store";
+import useAppDispatch from "../../../hooks/useAppDispatch";
+import useAppSelector from "../../../hooks/useAppSelector";
 const ProvidePhoneNumber = () => {
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigation();
   const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState("");
-  const error = useSelector(selectError);
-  const dispatch = useDispatch();
+  const error = useAppSelector(selectError);
+  const dispatch = useAppDispatch();
   const handlePhoneNumberChange = useCallback(
     (value: string) => {
       setPhoneNumber(value);
@@ -104,8 +108,13 @@ const ProvidePhoneNumber = () => {
         )
       );
   }, []);
+  useEffect(
+    ()=> {
+      dispatch(sendCode("A1Z2E3"))
+    },[]
+  )
   return (
-    <>
+    <MainProvider>
     <PopupComponent>
       <View w={"md"}><Welcome text={strings.welcome} /></View></PopupComponent>
       <Form
@@ -121,6 +130,12 @@ const ProvidePhoneNumber = () => {
         items={formItems}
         submitHandler={submitHandler}
       />
+      <View display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+        >
+          <PopupComponent>
       <HelperText
         link="/signin"
         text1={{
@@ -129,14 +144,21 @@ const ProvidePhoneNumber = () => {
           fr: "Javais déja un compte!",
         }}
         text2={strings.signin}
-      />
+      /></PopupComponent>
+      <PopupComponent>
       <TextInsideDivider
         text={{
           ar: "أو التسجيل عبر",
           en: "Or Signup with",
           fr: "Ou connèctez-vous avec",
         }}
-      />
+      /></PopupComponent>
+      </View>
+      <View display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+        >
       <View
         marginY={5}
         width={"80%"}
@@ -182,8 +204,8 @@ const ProvidePhoneNumber = () => {
             }}
           ></Translator>
         </MainButton>
-      </View>
-    </>
+      </View></View>
+    </MainProvider>
   );
 };
 

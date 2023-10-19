@@ -6,14 +6,12 @@ export interface SingleCharacterInputProps{
     rest:IInputProps,
     value:string,
     setValue:(val:string)=>void,
-    ref:MutableRefObject<any>
     
 }
 const SingleCharacterInput:React.FC<SingleCharacterInputProps> = (props) => {
-    const {value,setValue,ref,...rest} = props
+    const {value,setValue,...rest} = props
   return (
       <Input
-      ref={ref}
         value={props.value}
         borderColor={"muted.100"}
         bgColor={"muted.100"}

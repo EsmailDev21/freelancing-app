@@ -76,16 +76,28 @@ const SigninForm = () => {
       <View width={"sm"}><Welcome /></View>
     </PopupComponent>
     <Form isLoading={loading} title={strings.signin} items={signInItems} submitText={strings.loginScreen} submitHandler={submitHandler}  />
+    <View display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+        >
+    <PopupComponent>
     <HelperText link='/signup' text1={{
         ar:"ليس لدي حساب",
         en:"Don't have and account?",
         fr:"Je n'avais pas un compte!"
       }} text2={strings.signupForOurServices} />
+    </PopupComponent>
     <TextInsideDivider text={{
         ar:"أو التسجيل عبر",
         en:"Or Signup with",
         fr:"Ou connèctez-vous avec"
-      }} />
+      }} /></View>
+      <View display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+        >
     <View  marginY={5} width={"80%"} display={"flex"} flexDir={"row"} alignItems={"center"} justifyContent={"center"}>
       <MainButton icon={<EvilIcons name="sc-facebook" size={24} color="white" />} w={"40%"} marginX={2} _pressed={{bgColor:'indigo.900'}} bgColor={"indigo.800"} onPress={()=>console.log("pressed")} orientation={getOrientation()} >
         <Translator color={"white"} fontWeight={"bold"} text={{
@@ -101,7 +113,7 @@ const SigninForm = () => {
           fr:"Google"
         }}></Translator>
       </MainButton>
-    </View>
+    </View></View>
     </>
   )
 }
