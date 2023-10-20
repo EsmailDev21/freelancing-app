@@ -1,4 +1,4 @@
-import { Spinner } from 'native-base'
+import { Spinner, View } from 'native-base'
 import React, { useCallback, useState } from 'react'
 import PopupComponent from '../../../../components/animations/PopupComponent'
 import MainButton from '../../../../components/core/MainButton'
@@ -26,7 +26,7 @@ const index = () => {
   }, [loading]);
   return (
       <><PopupComponent>
-          <HeaderText text={strings.editProfile} />
+          <HeaderText text={strings.setupProfile} />
       </PopupComponent><PopupComponent>
               <SubHeaderText
                   text={{
@@ -34,10 +34,12 @@ const index = () => {
                       en: "Let's start with setting up your profile!",
                       fr: "Commonçons par la création de votre profile",
                   }} />
-          </PopupComponent><PopupComponent>
+          </PopupComponent>
               <CompleteProfileForm />
-          </PopupComponent><PopupComponent>
+          <PopupComponent>
+          
               <MainButton
+                    margin={10}
                   rightIcon={getOrientation() === "LATIN" ? null : null}
                   leftIcon={getOrientation() === "ARABIC" ? null : null}
                   isLoading={loading}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "freelancing-app",
-    "slug": "freelancing-app",
+    "name": "my-exporn-app",
+    "slug": "my-exporn-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

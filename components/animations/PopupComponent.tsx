@@ -16,7 +16,7 @@ const PopupComponent = ({children}) => {
     }, []);
 
     return (
-      <Animated.View  style={{ transform: [{ scale: popValue }] ,width:"auto"}}>
+      <Animated.View  style={{ transform: [{ scale: popValue }] }}>
         {children}
       </Animated.View>
     );

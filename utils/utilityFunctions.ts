@@ -42,9 +42,12 @@ export const checkEmail=(email:string)=> {
     
     return null;
   }
-  export const checkPhoneNumber=(value:string,cantBeEmpty:TextObject,mustBeNumberic:TextObject)=> {
+  export const checkPhoneNumber=(value:string,cantBeEmpty:TextObject,mustBeNumberic:TextObject,cantBeLessThanEight:TextObject)=> {
     if(value.length===0){
       return cantBeEmpty
+    }
+    if(value.length<8){
+      return cantBeLessThanEight
     }
     
     if(value.search(/[a-z]/)>1 || value.search(/[A-Z]/)>1)

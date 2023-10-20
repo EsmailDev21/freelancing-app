@@ -60,7 +60,7 @@ const SigninForm = () => {
       type:"password",
       setValue:handlePasswordChange,
       icon:<View marginX={3}><AntDesign name="eyeo" size={12} color="gray" /></View>,
-      helperElement:<Translator link='/' text={strings.forgotPassword}></Translator>,
+      helperElement:<Translator link='/forgotPassword/ProvidePhoneNumber' text={strings.forgotPassword}></Translator>,
       error:errorPassword
     },
   ]

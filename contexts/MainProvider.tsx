@@ -11,15 +11,14 @@ const MainProvider = ({children,langBtn=true}) => {
   return (
     <Provider store={store}>
       <NativeBaseProvider theme={theme}>
-        <SafeAreaView style={{padding:10}}>
+        
         <FontProvider>
       <LangContext withButton={langBtn}>
-      <View>
+      
       {children}
-      </View>
+      
     </LangContext>
     </FontProvider>
-    </SafeAreaView>
       </NativeBaseProvider>
     </Provider>
   )

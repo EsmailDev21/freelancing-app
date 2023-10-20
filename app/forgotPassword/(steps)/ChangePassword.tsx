@@ -92,40 +92,12 @@ const CompleteProfileForm = () => {
   };
 
   const items: FormItem[] = [
-    {
-      label: strings.name,
-      index: 0,
-      value: name,
-      type: "text",
-      setValue: handleNameChange,
-      icon: <InputIcon variant={"AntDesign"} name="user" />,
-      error: errorName,
-    },
-    {
-      label: strings.surname,
-      index: 1,
-      value: surname,
-      type: "text",
-      setValue: handleSurnameChange,
-      icon: <InputIcon variant={"AntDesign"} name="user" />,
-      error: errorSurname,
-    },
-    {
-      label: strings.email,
-      index: 2,
-      value: email,
-      type: "text",
-      setValue: handleEmailChange,
-      icon: (
-        <View marginX={3}>
-          <Fontisto name="email" size={12} color="gray" />
-        </View>
-      ),
-      error: errorEmail,
-    },
+   
+    
+   
 
     {
-      label: strings.password,
+      label: strings.newPassword,
       index: 3,
       value: password,
       type: "password",
@@ -149,7 +121,7 @@ const CompleteProfileForm = () => {
   ];
   useEffect(() => {
     
-    if (email.length != 0) setErrorEmail(checkEmail(email));
+
     if (password.length != 0) setErrorPassword(checkPassword(password));
     if (confirmPassword.length != 0)
       setErrorConfirmPassword(
@@ -159,101 +131,20 @@ const CompleteProfileForm = () => {
           fr: "Le mot de passes ne sont pas identiques",
         })
       );
-    if (surname.length != 0)
-      setErrorSurname(
-        checkString(surname, {
-          ar: "اللقب لا يمكن ان يكون فارغا",
-          en: "Surname can't be empty!",
-          fr: "Le nom ne doit pas étre vide",
-        })
-      );
-    if (name.length != 0)
-      setErrorName(
-        checkString(name, {
-          ar: "الأسم لا يمكن ان يكون فارغا",
-          en: "Name can't be empty!",
-          fr: "Le Prénom ne doit pas étre vide",
-        })
-      );
-  }, [errorEmail,errorName,errorPassword,errorSurname,errorConfirmPassword]);
+   
+   
+  }, [errorPassword,errorConfirmPassword]);
   return (
     <>
       <Form
         isLoading={loading}
-        title={strings.setupProfileInfos}
+        title={strings.changePassword}
         items={items}
-        submitText={strings.setupProfile}
+        submitText={strings.next}
         submitHandler={submitHandler}
       />
-      <View marginY={5} width={"80%"}>
-        <View
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          flexDirection={"column"}
-        >
-          <View
-            marginY={5}
-            width={"100%"}
-            display={"flex"}
-            flexDir={"row"}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <MainButton
-              icon={<EvilIcons name="sc-facebook" size={24} color="white" />}
-              w={"40%"}
-              marginX={2}
-              _pressed={{ bgColor: "indigo.900" }}
-              bgColor={"indigo.800"}
-              onPress={() => console.log("pressed")}
-              orientation={getOrientation()}
-            >
-              <Translator
-                color={"white"}
-                fontWeight={"bold"}
-                text={{
-                  ar: "فيسبوك",
-                  en: "facebook",
-                  fr: "facebook",
-                }}
-              ></Translator>
-            </MainButton>
-            <MainButton
-              icon={<AntDesign name="google" size={12} color="muted.900" />}
-              marginX={2}
-              w={"40%"}
-              _pressed={{ bgColor: "muted.50" }}
-              bgColor={"muted.100"}
-              onPress={() => console.log("pressed")}
-              orientation={getOrientation()}
-            >
-              <Translator
-                fontWeight={"bold"}
-                text={{
-                  ar: "جوجل",
-                  en: "Google",
-                  fr: "Google",
-                }}
-              ></Translator>
-            </MainButton>
-          </View>
-        </View>
-      </View>
-      <CheckBoxText
-        value="0"
-        text={{
-          ar: "من خلال تحديد المربع فإنك توافق على",
-          en: "By checking the box you agree to our",
-          fr: "En cochant la case, vous acceptez nos",
-        }}
-        textLink={{
-          ar: "شروط الاستخدام الخاصة بنا ",
-          en: " terms of use",
-          fr: " conditions d'utilisation",
-        }}
-        link="/"
-      />
+      
+      
     </>
   );
 };

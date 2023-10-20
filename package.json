@@ -1,7 +1,8 @@
 {
-  "name": "freelancing-app",
+  "name": "my-exporn-app",
   "version": "1.0.0",
   "main": "expo-router/entry",
+  "author": "Esmail Khorchani",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

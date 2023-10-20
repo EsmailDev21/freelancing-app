@@ -1,4 +1,4 @@
-import { Menu, Button, HamburgerIcon, Text, View } from "native-base";
+import { Menu, Button, HamburgerIcon, Text, View, useBreakpointValue } from "native-base";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLanguage, setLanguage } from "../redux/LanguageSlice";
@@ -24,17 +24,24 @@ const LanguageProvider = ({ children,withButton=true }: {children:any,withButton
   const switchLanguage = (language: "ar" | "fr" | "en") => {
     dispatch(setLanguage(language));
   };
-
+  const btnWidth = useBreakpointValue({
+     lg:"200px",
+     xl:"200px",
+     "2xl":"200px",
+     md:"200px",
+     base:"1/3"
+  })
   return (
     <LanguageContext.Provider value={useLanguage()}>
-      <SafeAreaView>
+      
         
-{withButton &&      <View position={"relative"} width={"20%"} zIndex={999} top={1} left={20}>
+{withButton &&      <View position={"relative"} zIndex={999} top={1} left={1}>
         <Menu
-          w="190"
           trigger={(triggerProps) => {
             return (
               <Button
+              maxWidth={btnWidth}
+                paddingX={5}
                 _pressed={{ bgColor: "muted.800" }}
                 bgColor={"muted.900"}
                 rightIcon={lang !== "ar" ? undefined : <HamburgerIcon />}
@@ -79,13 +86,13 @@ const LanguageProvider = ({ children,withButton=true }: {children:any,withButton
       <View
         textAlign={lang === "ar" ? "right" : "left"}
         display={"flex"}
-        alignItems={"center"}
+        width={"full"}
         justifyContent={"center"}
         height={"full"}
       >
         {children}
       </View>
-      </SafeAreaView>
+      
     </LanguageContext.Provider>
   );
 };

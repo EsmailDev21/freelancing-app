@@ -7,7 +7,7 @@ import { TextObject } from '../../../types'
 
 const Welcome = ({text=strings.welcomeBack}:{text?:TextObject}) => {
   return (
-    <View marginY={10} paddingX={20} width={"90%"}  alignSelf={getOrientation()==="ARABIC"?"center":"center"}>
+    <View marginY={10}   alignSelf={getOrientation()==="ARABIC"?"center":"center"}>
       <Translator fontWeight={"black"} fontSize={32} text={text}></Translator>
     </View>
   )

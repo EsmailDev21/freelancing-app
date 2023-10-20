@@ -946,6 +946,21 @@ export const strings = {
     en: "Edit Profile",
     fr: "Modifier le profil",
   },
+setupProfile: {
+    ar: "اعداد الملف الشخصي",
+    en: "Setup your Profile",
+    fr: "Créer votre profil",
+  },
+  changePassword:{
+    ar:"تغيير كلمة السر",
+    en:"Change password",
+    fr:"Modifier le mot de passe"
+  },
+  setupProfileInfos: {
+    ar: "اعداد معلومات الملف الشخصي",
+    en: "Setup your Profile informations",
+    fr: "Défenir votre informations de profile",
+  },
 
   // Profile Information
   profileInformation: {

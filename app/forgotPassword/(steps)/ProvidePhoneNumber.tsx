@@ -30,12 +30,15 @@ import MainProvider from "../../../contexts/MainProvider";
 import store from "../../../redux/store";
 import useAppDispatch from "../../../hooks/useAppDispatch";
 import useAppSelector from "../../../hooks/useAppSelector";
+import SubHeaderText from "../../signup/steps/PhoneVerificationScreen/components/SubHeaderText";
+import useErrorToast from "../../../components/core/toasts/ErrorToast";
 const ProvidePhoneNumber = () => {
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigation();
   const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState("");
   const error = useAppSelector(selectError);
+  const errorToast = useErrorToast();
   const dispatch = useAppDispatch();
   const handlePhoneNumberChange = useCallback(
     (value: string) => {
@@ -86,12 +89,37 @@ const ProvidePhoneNumber = () => {
     },
   ];
   const submitHandler = () => {
-    dispatch(setIsLoading(true));
-    setTimeout(() => {
-      dispatch(setIsLoading(false));
-      console.log({ phoneNumber, isLoading, error });
-    }, 3000);
-    router.push("/signup/steps/PhoneVerificationScreen")
+    
+    if(phoneNumber.length!=0){
+        dispatch(setIsLoading(true));
+        setTimeout(() => {
+            dispatch(setIsLoading(false));
+            console.log({ phoneNumber, isLoading, error });
+          }, 3000);
+          router.push("/forgotPassword/PhoneVerificationScreen")
+    }else {
+        errorToast({
+            title:strings.genericError,
+            message:checkPhoneNumber(
+                phoneNumber,
+                {
+                  ar: "رقم الهاتف لا يمكن ان يكون فارغا",
+                  en: "Phone number can't be empty!",
+                  fr: "Le numéro de téléphone ne doit pas étre vide",
+                },
+                {
+                  ar: "رقم الهاتف لا يمكن ان يتكون من أحرف",
+                  en: "Phone number can't contain characters!",
+                  fr: "Le numéro de téléphone ne doit pas contenir des caractères",
+                },
+                {
+                  ar: "رقم الهاتف لا يمكن ان يتكون من أقل من ثمانية ارقام",
+                  en: "Phone number can't contain less than eight number!",
+                  fr: "Le numéro de téléphone ne doit pas contenir moins des huit nombres",
+                }
+              )
+        })
+    }
   };
   useEffect(() => {
     if (phoneNumber.length != 0)
@@ -117,104 +145,34 @@ const ProvidePhoneNumber = () => {
           )
         )
       );
-  }, [phoneNumber]);
+  }, [phoneNumber,isLoading]);
   useEffect(
     ()=> {
-      dispatch(sendCode("A1Z2E3"))
+      dispatch(sendCode("AZ01TY"))
     },[]
   )
   return (
-    <MainProvider>
-    <PopupComponent>
-      <View ><Welcome text={strings.welcome} /></View></PopupComponent>
-      <Form
-        isLoading={isLoading}
-        title={strings.signupForOurServices}
-        submitIcon={
-          <AntDesign
-            color={"white"}
-            name={getOrientation() === "ARABIC" ? "arrowleft" : "arrowright"}
-          />
-        }
-        submitText={strings.next}
-        items={formItems}
-        submitHandler={submitHandler}
-      />
-      <View display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        flexDirection={"column"}
-        >
+    <><PopupComponent>
+          <View><Welcome text={strings.forgotPasswordScreen} /></View></PopupComponent>
           <PopupComponent>
-      <HelperText
-        link="/signin"
-        text1={{
-          ar: " لدي حساب مسبقا",
-          en: "I already have an account!",
-          fr: "Javais déja un compte!",
-        }}
-        text2={strings.signin}
-      />
-      <TextInsideDivider
-        text={{
-          ar: "أو التسجيل عبر",
-          en: "Or Signup with",
-          fr: "Ou connèctez-vous avec",
-        }}
-      /></PopupComponent>
-      </View>
-      <View display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        flexDirection={"column"}
-        >
-      <View
-        marginY={5}
-        width={"80%"}
-        display={"flex"}
-        flexDir={"row"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <MainButton
-          icon={<EvilIcons name="sc-facebook" size={24} color="white" />}
-          w={"40%"}
-          marginX={2}
-          _pressed={{ bgColor: "indigo.900" }}
-          bgColor={"indigo.800"}
-          onPress={() => console.log("pressed")}
-          orientation={getOrientation()}
-        >
-          <Translator
-            color={"white"}
-            fontWeight={"bold"}
-            text={{
-              ar: "فيسبوك",
-              en: "facebook",
-              fr: "facebook",
-            }}
-          ></Translator>
-        </MainButton>
-        <MainButton
-          icon={<AntDesign name="google" size={12} color="muted.900" />}
-          marginX={2}
-          w={"40%"}
-          _pressed={{ bgColor: "muted.50" }}
-          bgColor={"muted.100"}
-          onPress={() => console.log("pressed")}
-          orientation={getOrientation()}
-        >
-          <Translator
-            fontWeight={"bold"}
-            text={{
-              ar: "جوجل",
-              en: "Google",
-              fr: "Google",
-            }}
-          ></Translator>
-        </MainButton>
-      </View></View>
-    </MainProvider>
+              <SubHeaderText
+                  text={{
+                      ar: "قم بكتابقة رقم هاتفك هنا",
+                      en: "Please provide your phone number below!",
+                      fr: "Ecrire votre numéro de téléphone ici s'il vous plait!",
+                  }} />
+          </PopupComponent>
+          <Form
+              isLoading={isLoading}
+              title={{ar:"",fr:"",en:""}}
+              submitIcon={<AntDesign
+                  color={"white"}
+                  name={getOrientation() === "ARABIC" ? "arrowleft" : "arrowright"} />}
+              submitText={strings.next}
+              items={formItems}
+
+              submitHandler={submitHandler} /></>
+      
   );
 };
 
