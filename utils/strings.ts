@@ -951,6 +951,31 @@ setupProfile: {
     en: "Setup your Profile",
     fr: "Créer votre profil",
   },
+  setupProfileImage:{
+    ar: "قم برفع صورتك",
+    en: "Upload your Profile picture",
+    fr: "Télécharger votre photo de profil",
+  },
+  country:{
+    ar:"البلد",
+    en:"Country",
+    fr:"Pays"
+  },
+  region:{
+    ar:"الولاية",
+    en:"Region",
+    fr:"Région"
+  },
+  city:{
+    ar:"المدينة",
+    en:"City",
+    fr:"Ville"
+  },
+  skip:{
+    ar:"تخطي",
+    en:"Skip",
+    fr:"Passer"
+  },
   changePassword:{
     ar:"تغيير كلمة السر",
     en:"Change password",

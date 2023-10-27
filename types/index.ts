@@ -1,5 +1,6 @@
 import { IInputComponentType } from "native-base/lib/typescript/components/primitives/Input/types";
-
+export * from "./auth"
+export * from "./user"
 export class FormItem {
     index?:number
     label:TextObject
@@ -9,6 +10,7 @@ export class FormItem {
     isLoading?:boolean
     helperText?:TextObject
     value:string
+    numOfLines?:number
     type?:"text" | "password"
     setValue:(val:string)=>void
     icon?:JSX.Element
@@ -25,3 +27,23 @@ export type StrictTextObject = {
 }
 
 export type TextObject = Partial<StrictTextObject>
+
+export type UserLanguage = {
+    designation : string,
+    level : "BEGINNER" | "INTERMEDIATE" | "ADVANCED" | "FLUENT" | "NATIVE/BILINGUAL"
+}
+
+export type UserSkill = {
+    designation : string,
+    domain?:string,
+    level : "BEGINNER" | "INTERMEDIATE" | "ADVANCED" | "EXPERT" 
+}
+
+export type UserEducation = {
+    fieldOfStudy?:string,
+    certificate?:string,
+    university?:string,
+    startedAt?:Date,
+    finishedAt?:Date,
+    level ?:"BACHELOR" | "ASSOCIATE" | "MASTERS" | "PHD" 
+}

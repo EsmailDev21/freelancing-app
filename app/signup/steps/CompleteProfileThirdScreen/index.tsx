@@ -1,5 +1,5 @@
-import { Spinner, View } from 'native-base'
-import React, { useCallback, useState } from 'react'
+import { HStack, Spinner, View , Stack} from 'native-base'
+import React, { useCallback, useEffect, useState } from 'react'
 import PopupComponent from '../../../../components/animations/PopupComponent'
 import MainButton from '../../../../components/core/MainButton'
 import Translator from '../../../../components/hoc/Translator'
@@ -8,49 +8,57 @@ import { getOrientation } from '../../../../utils/utilityFunctions'
 import HeaderText from '../PhoneVerificationScreen/components/HeaderText'
 import SubHeaderText from '../PhoneVerificationScreen/components/SubHeaderText'
 import { useDispatch } from 'react-redux'
-import { useRouter } from 'expo-router'
-import CompleteProfileForm from '../../components/CompleteProfileForm'
+import {  useRouter } from 'expo-router'
+import ProfileAdditionalInfosForm from './components/ProfileAdditionalInfosForm'
 
 const index = () => {
     const [loading,setLoading] = useState(false)
+    const [error,setError] = useState(null)
+    const [imageUri,setImageUri] = useState(null)
   const router = useRouter();
   const dispatch = useDispatch();
+
   const submitHandler = useCallback(() => {
     setLoading(true);
-    setTimeout(() => console.log("Submitted"), 3000);
+    setTimeout(() => {
+      console.log("Submitted")
+      router.replace("/")
+    }, 3000);
  
-      router.push("/signup/steps/CompleteProfileSecondScreen")
+      
    
   }, [loading]);
+
   return (
       <><PopupComponent>
-          <HeaderText text={strings.setupProfile} />
+          <HeaderText text={strings.setupProfileInfos} />
       </PopupComponent><PopupComponent>
               <SubHeaderText
-                  text={{
-                      ar: "لنقم بتجهيز البروفايل الخاص بك!",
-                      en: "Let's start with setting up your profile!",
-                      fr: "Commonçons par la création de votre profile",
-                  }} />
+                  text={strings.setupProfile} />
           </PopupComponent>
-              <CompleteProfileForm />
-          <PopupComponent>
-          
+          <ProfileAdditionalInfosForm />
+          <PopupComponent >
+                  <Stack direction="column">
+                  
               <MainButton
-                    margin={10}
+              bgColor={"white"}
+              _pressed={{bgColor:"muted.100"}}
+              borderColor={"muted.900"}
+              borderWidth={"1"}
+                    margin={5}
                   rightIcon={getOrientation() === "LATIN" ? null : null}
                   leftIcon={getOrientation() === "ARABIC" ? null : null}
-                  isLoading={loading}
-                  isDisabled={loading == true}
                   onPress={submitHandler}
                   orientation={getOrientation()}
               >
                   {loading === true ? (
                       <Spinner color={"muted.50"} />
                   ) : (
-                      <Translator text={strings.next} color={"muted.100"} />
+                      <Translator text={strings.skip} fontWeight={"semibold"} color={"muted.900"} />
                   )}
               </MainButton>
+                  </Stack>
+              
           </PopupComponent></>
   )
 }

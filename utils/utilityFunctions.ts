@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormItem, TextObject } from "../types";
+import { FormItem, TextObject, UserLanguage, UserSkill } from "../types";
 
 export const getOrientation = () => {
     const lang = window.localStorage.getItem("language");
@@ -37,6 +37,20 @@ export const checkEmail=(email:string)=> {
   }
   export const checkString=(value:string,message:TextObject)=> {
     if(value.length===0){
+      return message
+    }
+    
+    return null;
+  }
+  export const checkSkillArray=(value:UserSkill[],message:TextObject)=> {
+    if(value.length<5){
+      return message
+    }
+    
+    return null;
+  }
+  export const checkLanguageArray=(value:UserLanguage[],message:TextObject)=> {
+    if(value.length<1){
       return message
     }
     

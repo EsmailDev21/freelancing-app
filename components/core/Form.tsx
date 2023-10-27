@@ -70,6 +70,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
                 value={item.value}
                 setValue={item.setValue}
                 rest={{
+                  numberOfLines:item.numOfLines,
                   placeholder: useTranslator(item.label),
                   type: item.type,
                   width: "full",
